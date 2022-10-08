@@ -26,6 +26,8 @@ import javafx.scene.web.WebView;
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.CookieHandler;
+import java.net.CookieManager;
 import java.util.concurrent.CompletableFuture;
 
 /*
@@ -45,8 +47,9 @@ public class LoginFrame extends JFrame
         this.setTitle("Microsoft Authentication");
         this.setSize(750, 750);
         this.setLocationRelativeTo(null);
-
         this.setContentPane(new JFXPanel());
+        this.setAlwaysOnTop(true);
+        clearCookies();
     }
 
     public CompletableFuture<String> start(String url)
@@ -88,5 +91,12 @@ public class LoginFrame extends JFrame
         webView.getEngine().load(url);
 
         this.setVisible(true);
+    }
+
+    protected void clearCookies()
+    {
+        CookieManager manager = new CookieManager();
+        CookieHandler.setDefault(manager);
+        manager.getCookieStore().removeAll();
     }
 }
