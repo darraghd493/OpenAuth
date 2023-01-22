@@ -72,9 +72,7 @@ public class LoginFrame extends JFrame
 
     protected void init(String url)
     {
-        java.net.CookieManager manager = new java.net.CookieManager();
-        java.net.CookieHandler.setDefault(manager);
-        manager.getCookieStore().removeAll();
+        clearCookies();
 
         WebView webView = new WebView();
         JFXPanel content = (JFXPanel) this.getContentPane();
